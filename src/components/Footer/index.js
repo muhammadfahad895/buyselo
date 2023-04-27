@@ -11,27 +11,40 @@ import AppIcon from "../AppIcon";
 
 const Footer = () => {
   return (
-    <Box>
-      <Logo />
-      <Stack>
-        <ul>
-          <li>POPULAR CATEGORIES</li>
+    <Box sx={{ color: "white" }}>
+      <Stack
+        flexDirection="row"
+        justifyContent="space-between"
+        padding="2.5rem"
+        backgroundColor="rgb(27, 27, 27)"
+        alignItems="center"
+        flexWrap="wrap"
+      >
+        <Logo width="130px" height="60px" />
+        <ul style={flex}>
+          <li style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+            POPULAR CATEGORIES
+          </li>
           <li>Cars</li>
           <li>Flats for rent</li>
           <li>Mobile Phones</li>
           <li>Jobs</li>
         </ul>
 
-        <ul>
-          <li>Trending Searches</li>
+        <ul style={flex}>
+          <li style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+            Trending Searches
+          </li>
           <li>Bikes</li>
           <li>Watches</li>
           <li>Books</li>
           <li>Dogs</li>
         </ul>
 
-        <ul>
-          <li>Quick Links</li>
+        <ul style={flex}>
+          <li style={{ fontSize: "1.3rem", fontWeight: "bold" }}>
+            Quick Links
+          </li>
           <li>About Us</li>
           <li>Contact Us</li>
           <li>Help And Support</li>
@@ -39,18 +52,28 @@ const Footer = () => {
         </ul>
 
         <Box>
-          <Box>
-            <Typography>Follow Us</Typography>
-            <TiSocialFacebookCircular />
-            <TiSocialTwitterCircular />
-            <TiSocialYoutube />
-            <TiSocialInstagram />
+          <Box sx={flex}>
+            <Typography variant="h5" fontWeight="bold">
+              Follow Us
+            </Typography>
+            <Box fontSize="2rem" color="#dfe6e9">
+              <TiSocialFacebookCircular />
+              <TiSocialTwitterCircular />
+              <TiSocialYoutube />
+              <TiSocialInstagram />
+            </Box>
           </Box>
 
-          <AppIcon />
+          <AppIcon width="5rem" gap />
         </Box>
       </Stack>
-      <footer>
+      <footer
+        style={{
+          paddingBlock: "1rem",
+          textAlign: "center",
+          backgroundColor: "#1e272e",
+        }}
+      >
         <Typography>
           Copyright © 2023 Buysello. All Rights Reserved. Design by: Muhammad
           Fahad
@@ -61,3 +84,10 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const flex = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.5rem",
+  flexWrap: "wrap",
+};

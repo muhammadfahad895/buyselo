@@ -119,6 +119,9 @@ a {
   background-color: #ea4335;
 }
 
-.aasd{
-  color: rgba(128, 128, 128, 0.575)
+li {
+  list-style-type: none;
+}
+.flex{
+  justify-content: space-between;
 }

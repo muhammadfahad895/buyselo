@@ -2,15 +2,15 @@ import React from "react";
 import googleStore from "../../assets/playstore.svg";
 import appleStore from "../../assets/appleStore.svg";
 import appGallery from "../../assets/appgallery.svg";
-import { Box } from "@mui/material";
+import { Stack } from "@mui/material";
 
-const AppIcon = () => {
+const AppIcon = ({ width = "11rem", gap = "2rem" }) => {
   return (
-    <Box>
-      <img src={googleStore} alt="Google play Store" />
-      <img src={appleStore} alt="Apple Store" />
-      <img src={appGallery} alt="App Gallery" />
-    </Box>
+    <Stack flexDirection="row" gap={gap}>
+      <img style={{ width }} src={googleStore} alt="Google play Store" />
+      <img style={{ width }} src={appleStore} alt="Apple Store" />
+      <img style={{ width }} src={appGallery} alt="App Gallery" />
+    </Stack>
   );
 };
 

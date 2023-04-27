@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { FaBlackTie, FaUserAlt } from "react-icons/fa";
-import DescriptionIcon from "@mui/icons-material/Description";
+import { MdDescription } from "react-icons/md";
 
 const UseSection = () => {
   const data = [
@@ -18,7 +18,7 @@ const UseSection = () => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.",
     },
     {
-      icon: <DescriptionIcon />,
+      icon: <MdDescription />,
       heading: "Sold or Buy",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.",
@@ -26,20 +26,46 @@ const UseSection = () => {
   ];
 
   return (
-    <Box>
-      <Box>
-        {data.map((dt) => {
-          return (
-            <>
-              <div>{dt.icon}</div>
-              <Typography>{dt.heading}</Typography>
-              <Typography>{dt.description}</Typography>
-            </>
-          );
-        })}
-      </Box>
+    <Box sx={style.useSection}>
+      {data.map((dt) => {
+        return (
+          <Box sx={style.items}>
+            <div
+              style={{
+                fontSize: "4rem",
+              }}
+            >
+              {dt.icon}
+            </div>
+            <Typography variant="h5">{dt.heading}</Typography>
+            <Typography>{dt.description}</Typography>
+          </Box>
+        );
+      })}
     </Box>
   );
 };
 
 export default UseSection;
+
+const style = {
+  useSection: {
+    display: "flex",
+    gap: "1rem",
+    justifyContent: "center",
+    paddingBlock: "2.5rem",
+    backgroundColor: "rgb(27, 27, 27)",
+    color: "white",
+    boxShadow:
+      "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+  },
+
+  items: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5rem",
+    textAlign: "center",
+    paddingInline: "2rem",
+    flexWrap: "wrap",
+  },
+};

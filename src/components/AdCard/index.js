@@ -6,7 +6,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 const AdCard = () => {
   return (
     <Box sx={cardContainer}>
-      <img src={adpic} alt="Ad img" width="262px" height="232px" />
+      <img src={adpic} alt="Ad img" width="300px" height="232px" />
       <Box sx={cardBody}>
         <Typography variant="h5">BMW F20 1 Series Hatchback 5-door</Typography>
         <Typography sx={{ color: "rgba(128, 128, 128, 0.900)" }}>
@@ -26,7 +26,7 @@ const AdCard = () => {
 // https://themeforest.net/item/classified-plus-classifieds-websites-psd-templates/21155267?ref=designuser#
 
 const cardContainer = {
-  width: "263px",
+  width: "300px",
   display: "flex",
   flexDirection: "column",
   gap: "1rem",
@@ -34,7 +34,7 @@ const cardContainer = {
   boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 };
 const cardBody = {
-  width: "263px",
+  width: "300px",
   display: "flex",
   flexDirection: "column",
   gap: "0.5rem",

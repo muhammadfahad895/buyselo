@@ -5,7 +5,7 @@ import {
   UseSection,
   Cta,
   Footer,
-  AdCard,
+  UserAds,
 } from "../../components";
 // import { Button } from "../../components";
 // import { signOutUser } from "../../Config/firebase";
@@ -18,12 +18,12 @@ const Dashboard = () => {
 
   return (
     <div>
-      {/*  <Header />
-      <Categories /> */}
-      <AdCard />
-      {/*  <UseSection />
+      <Header />
+      <Categories />
+      <UserAds />
+      <UseSection />
       <Cta />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };
