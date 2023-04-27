@@ -29,32 +29,26 @@ const Signin = ({ setScreen }) => {
       ),
   });
 
-  const {
-    values,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    touched,
-    errors,
-    resetForm,
-  } = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    // validationSchema: signInSchema,
-    onSubmit: (values) => {
-      loginUserHandle({ email: values.email, password: values.password });
-    },
-  });
+  const { values, handleChange, handleBlur, handleSubmit, touched, errors } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: signInSchema,
+      onSubmit: (values) => {
+        loginUserHandle({ email: values.email, password: values.password });
+      },
+    });
 
   const loginUserHandle = async (obj) => {
     try {
-      const user = await loginUser(obj);
+      await loginUser(obj);
       swal("", "Account Login successfully!", "success");
     } catch ({ code }) {
       swal("", code, "error");
     }
+    console.log(user);
   };
 
   return (
