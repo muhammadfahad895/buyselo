@@ -48,7 +48,6 @@ const Signin = ({ setScreen }) => {
     } catch ({ code }) {
       swal("", code, "error");
     }
-    console.log(user);
   };
 
   return (
