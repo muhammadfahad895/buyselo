@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Dashboard, Signin, Signup, Login } from "./views";
+import { Dashboard, Signin, Signup, Login, AddPost } from "./views";
 import { auth } from "./Config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -13,10 +13,11 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        // setScreen("addpost");
         setScreen("dashboard");
       } else {
         console.log("no user found");
-        setScreen("signin");
+        setScreen("dashboard");
       }
     });
   }, []);
@@ -26,7 +27,10 @@ function App() {
       {screen === "login" && <Login setScreen={setScreen} />}
       {screen === "signup" && <Signup setScreen={setScreen} />}
       {screen === "signin" && <Signin setScreen={setScreen} />}
-      {screen === "dashboard" && <Dashboard setScreen={setScreen} />}
+      {screen === "dashboard" && (
+        <Dashboard setScreen={setScreen} user={user} />
+      )}
+      {screen === "addpost" && <AddPost setScreen={setScreen} />}
     </div>
   );
 }

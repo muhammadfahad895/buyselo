@@ -25,13 +25,6 @@ const UserAds = () => {
         gap="1rem"
       >
         <AdCard />
-        <AdCard />
-        <AdCard />
-        <AdCard />
-        <AdCard />
-        <AdCard />
-        <AdCard />
-        <AdCard />
       </Stack>
     </Box>
   );

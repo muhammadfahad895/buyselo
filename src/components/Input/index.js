@@ -17,6 +17,7 @@ const Input = ({
   onBlur,
   touched,
   errors,
+  sx,
 }) => {
   return (
     <Box>

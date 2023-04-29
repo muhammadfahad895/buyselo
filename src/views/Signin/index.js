@@ -35,7 +35,7 @@ const Signin = ({ setScreen }) => {
         email: "",
         password: "",
       },
-      validationSchema: signInSchema,
+      // validationSchema: signInSchema,
       onSubmit: (values) => {
         loginUserHandle({ email: values.email, password: values.password });
       },
@@ -53,7 +53,7 @@ const Signin = ({ setScreen }) => {
   return (
     <Box sx={styles.container}>
       <Stack alignItems={"center"}>
-        <Logo />
+        <Logo width="150px" />
         <h3>Sign In</h3>
       </Stack>
       <Box

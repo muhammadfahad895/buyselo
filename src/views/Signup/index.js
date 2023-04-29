@@ -57,7 +57,7 @@ const Signup = ({ setScreen }) => {
       password: "",
       confirmPassword: "",
     },
-    // validationSchema: signupSchema,
+    validationSchema: signupSchema,
     onSubmit: (values) => {
       createUserHandle({
         email: values.email,
@@ -80,7 +80,7 @@ const Signup = ({ setScreen }) => {
   return (
     <Box sx={styles.container}>
       <Stack alignItems={"center"}>
-        <Logo />
+        <Logo width="150px" />
         <h3>Sign Up</h3>
       </Stack>
       <Box

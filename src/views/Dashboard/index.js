@@ -10,7 +10,7 @@ import {
 // import { Button } from "../../components";
 // import { signOutUser } from "../../Config/firebase";
 
-const Dashboard = () => {
+const Dashboard = ({ setScreen, user }) => {
   // const logOut = () => {
   //   signOutUser();
   //   setScreen("signin");
@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Header />
+      <Header setScreen={setScreen} user={user} />
       <Categories />
       <UserAds />
       <UseSection />

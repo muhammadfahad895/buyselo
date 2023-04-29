@@ -12,6 +12,8 @@ import Footer from "./Footer";
 import AppIcon from "./AppIcon";
 import UserAds from "./UserAds";
 import AdCard from "./AdCard";
+import SelectCategory from "./SelectCategory";
+import AddPics from "./AddPics";
 
 export {
   Button,
@@ -28,4 +30,6 @@ export {
   AppIcon,
   UserAds,
   AdCard,
+  SelectCategory,
+  AddPics,
 };

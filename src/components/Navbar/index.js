@@ -1,10 +1,26 @@
 import React from "react";
 import Logo from "../Logo";
 import { Box } from "@mui/material";
-import { Button } from "../../components";
+import { Button as Btn } from "../../components";
 import PersonIcon from "@mui/icons-material/Person";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import { signOutUser } from "../../Config/firebase";
 
-const Navbar = () => {
+const Navbar = ({ setScreen, user }) => {
+  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   return (
     <Box
       sx={[
@@ -23,9 +39,52 @@ const Navbar = () => {
           <li style={style.navbarlist}>Contact Us</li>
         </ul>
         <ul style={style.navbarItems}>
-          <li>Resigter/Sign In</li>
+          {user ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem>Profile</MenuItem>
+                <MenuItem
+                  onClick={async () => {
+                    await signOutUser();
+                    await setScreen("dashboard");
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Box>
+          ) : (
+            <li onClick={() => setScreen("login")}>Resigter/Sign In</li>
+          )}
+
           <li>
-            <Button startIcon={<PersonIcon />} text="POST YOUR AD" />
+            <Btn
+              startIcon={<PersonIcon />}
+              handleClick={() =>
+                user ? setScreen("addpost") : setScreen("signin")
+              }
+              text="POST YOUR AD"
+            />
           </li>
         </ul>
       </Box>

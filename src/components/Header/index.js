@@ -4,10 +4,10 @@ import HeroSection from "../HeroSection";
 import { Box } from "@mui/material";
 import Hero from "../../assets/Hero.png";
 
-const Header = () => {
+const Header = ({ setScreen, user }) => {
   return (
     <Box sx={style}>
-      <Navbar />
+      <Navbar setScreen={setScreen} user={user} />
       <HeroSection />
     </Box>
   );

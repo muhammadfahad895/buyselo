@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 import {
   getAuth,
@@ -7,6 +16,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 import swal from "sweetalert";
 
 const firebaseConfig = {
@@ -21,6 +33,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export const auth = getAuth(app);
 
@@ -58,11 +71,66 @@ export const loginUser = async ({ email, password }) => {
   return user;
 };
 
+export const createPostAd = async ({
+  title,
+  description,
+  price,
+  location,
+  name,
+  category,
+  images,
+}) => {
+  try {
+    await addDoc(collection(db, "ad"), {
+      title,
+      description,
+      price,
+      location,
+      name,
+      category,
+      images,
+    });
+    return true;
+  } catch ({ message }) {
+    swal("", `${message}`, "error");
+  }
+};
+
 export const signOutUser = async () => {
   try {
     await signOut(auth);
     return {
       status: "success",
+    };
+  } catch (error) {
+    console.log(error.message);
+    return {
+      status: "error",
+      error: error.message,
+    };
+  }
+};
+
+export const uploadImage = async (file) => {
+  const imageRef = await ref(storage, "pics/" + file.name);
+  const uploadBytesRes = await uploadBytes(imageRef, file);
+  const url = await getDownloadURL(uploadBytesRes.ref);
+  return url;
+};
+
+export const getAllAdsData = async () => {
+  try {
+    const q = query(collection(db, "ad"));
+    const querySnapshot = await getDocs(q);
+
+    let arr = [];
+    querySnapshot.forEach((doc) => {
+      arr.push(doc.data());
+    });
+    console.log(arr);
+    return {
+      status: "success",
+      data: arr,
     };
   } catch (error) {
     console.log(error.message);
