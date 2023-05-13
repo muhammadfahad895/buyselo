@@ -8,6 +8,7 @@ import {
   query,
   where,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 
 import {
@@ -20,6 +21,7 @@ import {
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import swal from "sweetalert";
+import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyASnDIaNOrtB5nRjxWkMgB8I8r_eLvWi4M",
@@ -79,6 +81,7 @@ export const createPostAd = async ({
   name,
   category,
   images,
+  user,
 }) => {
   try {
     await addDoc(collection(db, "ad"), {
@@ -89,6 +92,7 @@ export const createPostAd = async ({
       name,
       category,
       images,
+      user,
     });
     return true;
   } catch ({ message }) {
@@ -124,10 +128,12 @@ export const getAllAdsData = async () => {
     const querySnapshot = await getDocs(q);
 
     let arr = [];
+    let obj = {};
     querySnapshot.forEach((doc) => {
-      arr.push(doc.data());
+      obj = { ...doc.data() };
+      obj.docId = doc.id;
+      arr.push(obj);
     });
-    console.log(arr);
     return {
       status: "success",
       data: arr,
@@ -139,4 +145,48 @@ export const getAllAdsData = async () => {
       error: error.message,
     };
   }
+};
+
+export const getAd = async (id) => {
+  const docRef = doc(db, "ad", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
+
+// export const filteredData = async (user) => {
+//   const filterData = collection(db, "ad");
+//   const q = query(filterData, where(user, "==", "user"));
+//   console.log(q);
+
+//   const querySnapshot = await getDocs(q);
+//   console.log(getDocs(q));
+//   querySnapshot.forEach((doc) => {
+//     return doc.data();
+//     // console.log("doc.data", doc.data);
+//   });
+// };
+export const filterDataByUserId = (userId) => {
+  const database = firebaseConfig.database();
+  const ref = database.ref("users");
+  const query = ref.orderByChild("userId").equalTo(userId);
+
+  return query
+    .once("value")
+    .then((snapshot) => {
+      const filteredData = [];
+      snapshot.forEach((childSnapshot) => {
+        filteredData.push(childSnapshot.val());
+      });
+      return filteredData;
+    })
+    .catch((error) => {
+      console.error(error);
+      return [];
+    });
 };

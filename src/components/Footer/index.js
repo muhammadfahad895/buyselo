@@ -16,7 +16,7 @@ const Footer = () => {
         flexDirection="row"
         justifyContent="space-between"
         padding="2.5rem"
-        backgroundColor="rgb(27, 27, 27)"
+        backgroundColor="#2980b9"
         alignItems="center"
         flexWrap="wrap"
       >
@@ -71,7 +71,7 @@ const Footer = () => {
         style={{
           paddingBlock: "1rem",
           textAlign: "center",
-          backgroundColor: "#1e272e",
+          backgroundColor: "#227093",
         }}
       >
         <Typography>

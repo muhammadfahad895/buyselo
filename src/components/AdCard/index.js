@@ -2,10 +2,11 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { getAllAdsData } from "../../Config/firebase";
+import { useNavigate } from "react-router-dom";
 
 const AdCard = () => {
   const [data, setData] = useState([]);
-
+ const navigate = useNavigate();
   const getData = async () => {
     const res = await getAllAdsData();
     setData(res.data);
@@ -13,9 +14,14 @@ const AdCard = () => {
   useEffect(() => {
     getData();
   }, []);
+  console.log("data", data);
   return data.map((item, index) => {
     return (
-      <Box sx={cardContainer} key={index}>
+      <Box
+        sx={cardContainer}
+        key={index}
+        onClick={() => navigate(`addetail/${item.docId}`)}
+      >
         <img src={item.images} width="295px" height="232px" />
 
         <Box sx={cardBody}>
@@ -40,7 +46,6 @@ const cardContainer = {
   width: "300px",
   display: "flex",
   flexDirection: "column",
-  gap: "1rem",
   border: "1px solid rgba(31, 30, 30, 0.308)",
   boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
 };
@@ -50,6 +55,8 @@ const cardBody = {
   flexDirection: "column",
   gap: "0.5rem",
   paddingLeft: "0.8rem",
+  borderTop: "1px solid rgba(31, 30, 30, 0.308)",
+  paddingBlock: "0.5rem",
 };
 
 export default AdCard;

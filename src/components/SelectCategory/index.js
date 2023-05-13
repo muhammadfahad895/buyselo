@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import React from "react";
 import categoryData from "../../categoryData";
+import { useNavigate } from "react-router-dom";
 
 const SelectCategory = ({ setCategory }) => {
+  const navigate = useNavigate();
+
   return (
     <Box sx={style.selectCategory}>
       <Typography
@@ -27,7 +30,10 @@ const SelectCategory = ({ setCategory }) => {
             <ListItem key={i} sx={style.category}>
               <ListItemButton
                 sx={{ "&:hover": { backgroundColor: "unset" } }}
-                onClick={(e) => setCategory(e.target.innerText)}
+                onClick={(e) => {
+                  navigate("/addpost", { state: { cat: e.target.innerText } });
+                  setCategory(e.target.innerText);
+                }}
               >
                 <ListItemIcon>{el.icon}</ListItemIcon>
                 <ListItemText primary={el.categoryName} />

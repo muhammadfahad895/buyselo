@@ -4,6 +4,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 import { Logo, Input, Button } from "../../components";
 
@@ -12,7 +13,8 @@ import { loginUser } from "../../Config/firebase";
 import EmailIcon from "@mui/icons-material/Email";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
-const Signin = ({ setScreen }) => {
+const Signin = () => {
+  const navigate = useNavigate();
   const signInSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
@@ -106,7 +108,7 @@ const Signin = ({ setScreen }) => {
         }}
       >
         Don't have an Account ?
-        <span onClick={() => setScreen("signup")} style={styles.signin}>
+        <span onClick={() => navigate("/signup")} style={styles.signin}>
           Sign Up
         </span>
       </p>

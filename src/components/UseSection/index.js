@@ -54,7 +54,7 @@ const style = {
     gap: "1rem",
     justifyContent: "center",
     paddingBlock: "2.5rem",
-    backgroundColor: "rgb(27, 27, 27)",
+    backgroundColor: "#2980b9",
     color: "white",
     boxShadow:
       "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",

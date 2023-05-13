@@ -5,6 +5,7 @@ import { Box, Stack } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 // Component
 import { Logo, Input, Button } from "../../components";
@@ -18,6 +19,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 const Signup = ({ setScreen }) => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   // Yup Validation Schema
@@ -143,7 +145,7 @@ const Signup = ({ setScreen }) => {
         }}
       >
         Don't have an Account ?
-        <span onClick={() => setScreen("signin")} style={styles.signin}>
+        <span onClick={() => navigate("/signin")} style={styles.signin}>
           Sign In
         </span>
       </p>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../Logo";
 import { Box } from "@mui/material";
 import { Button as Btn } from "../../components";
@@ -9,8 +9,26 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { signOutUser } from "../../Config/firebase";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { auth } from "../../Config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
-const Navbar = ({ setScreen, user }) => {
+const Navbar = () => {
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        // setUser(user);
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
+
   // const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -34,9 +52,15 @@ const Navbar = ({ setScreen, user }) => {
       <Box sx={style.navbar}>
         <Logo width="163px" />
         <ul style={style.navbarItems}>
-          <li style={style.navbarlist}>Home</li>
-          <li style={style.navbarlist}>About Us</li>
-          <li style={style.navbarlist}>Contact Us</li>
+          <li style={style.navbarlist} onClick={() => navigate("/")}>
+            Home
+          </li>
+          <li style={style.navbarlist} onClick={() => navigate("aboutus")}>
+            About Us
+          </li>
+          <li style={style.navbarlist} onClick={() => navigate("contactus")}>
+            Contact Us
+          </li>
         </ul>
         <ul style={style.navbarItems}>
           {user ? (
@@ -64,9 +88,16 @@ const Navbar = ({ setScreen, user }) => {
               >
                 <MenuItem>Profile</MenuItem>
                 <MenuItem
-                  onClick={async () => {
-                    await signOutUser();
-                    await setScreen("dashboard");
+                  onClick={() => {
+                    navigate("/myads");
+                  }}
+                >
+                  My Ads
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    signOutUser();
+                    navigate("/");
                   }}
                 >
                   Logout
@@ -74,14 +105,14 @@ const Navbar = ({ setScreen, user }) => {
               </Menu>
             </Box>
           ) : (
-            <li onClick={() => setScreen("login")}>Resigter/Sign In</li>
+            <li onClick={() => navigate("/login")}>Resigter/Sign In</li>
           )}
 
           <li>
             <Btn
               startIcon={<PersonIcon />}
               handleClick={() =>
-                user ? setScreen("addpost") : setScreen("signin")
+                user ? navigate("/addpost") : navigate("/signin")
               }
               text="POST YOUR AD"
             />

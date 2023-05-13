@@ -14,7 +14,9 @@ import {
 } from "@mui/material";
 
 import { createPostAd, uploadImage } from "../../Config/firebase";
+import { auth } from "../../Config/firebase";
 
+import { useLocation } from "react-router-dom";
 import { SelectCategory } from "../../components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -22,8 +24,10 @@ import swal from "sweetalert";
 
 const AddPost = () => {
   const [category, setCategory] = useState(null);
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState({});
+  const [user] = useState(auth.currentUser.uid);
 
   const postAdSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -49,6 +53,7 @@ const AddPost = () => {
       price: "",
       location: "",
       name: "",
+      user,
     },
     // validationSchema: postAdSchema,
     onSubmit: async (values) => {
@@ -70,6 +75,7 @@ const AddPost = () => {
         name: values.name,
         category: category,
         images: imagesUrls,
+        user: user,
       });
     },
   });
@@ -89,9 +95,11 @@ const AddPost = () => {
     setImages({ ...images, [index]: file });
   };
 
+  const { state } = useLocation();
+
   return (
     <Box>
-      <Box sx={{ paddingBlock: "1rem", backgroundColor: "#34495e" }}>
+      <Box sx={{ paddingBlock: "1rem", backgroundColor: "#2980b9" }}>
         <Logo width="130px" />
       </Box>
       <Typography
@@ -129,7 +137,7 @@ const AddPost = () => {
                 alignItems: "center",
               }}
             >
-              <Typography>{category}</Typography>
+              <Typography>{location.state.cat}</Typography>
               <Button
                 sx={{
                   textTransform: "lowercase",
